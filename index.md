@@ -1,2 +1,2 @@
-## Welcome to Kathleen's Assignement 6 Page
+## Welcome to Kathleen's Assignment 6 Page
 
