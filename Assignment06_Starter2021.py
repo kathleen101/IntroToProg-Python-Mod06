@@ -9,10 +9,11 @@
 # KWONG, 11.22.2021, Modified code to complete assignment 06
 # KWONG, 11.26.2021, Modified code to correctly complete assignment 06 in list format
 # ---------------------------------------------------------------------------- #
-
+import os
 # Data ---------------------------------------------------------------------- #
 # Declare variables and constants
-file_name_str = "ToDoFile.txt"  # The name of the data file
+dir_path = os.path.dirname(os.path.realpath(__file__)) # pulling directory
+file_name_str = os.path.join(dir_path, "ToDoFile.txt")  # The name of the data file
 file_obj = None  # An object that represents a file
 row_dic = {}  # A row of data separated into elements of a dictionary {Task,Priority}
 table_lst = []  # A list that acts as a 'table' of rows
@@ -43,16 +44,15 @@ class Processor:
     @staticmethod
     def add_data_to_list(task, priority, list_of_rows):
         """ Adds new data into list of dictionary rows
-
         :param task: (string) you want to add to list
         :param priority: (list) you want to attach to task
         :param list_of_rows: (list) you want filled with file data:
         :return: (list) of dictionary rows
         """
-        row_dic = {"Task": task, "Priority": priority}
-        list_of_rows.append(row_dic)
-        print("\n Okay,", task, "added!")
-        return list_of_rows
+        row_dic = {"Task": task, "Priority": priority} # sets task and priority into dictionary
+        list_of_rows.append(row_dic) # appends task and priority to list_of_rows
+        print("\n Okay,", task, "added!") # prints status
+        return list_of_rows # returns list
 
     @staticmethod
     def remove_data_from_list(task, list_of_rows):
@@ -62,10 +62,10 @@ class Processor:
         :param list_of_rows: (list) you want filled with file data:
         :return: (list) of dictionary rows
         """
-        row_num = 0
+        row_num = 0 # set row_num to 0
         for row in list_of_rows:
-            task_check, priority_check = dict(row).values()
-            if task.lower() == task_check.lower():
+            task_check, priority_check = dict(row).values() # sets task_check and priority_check to dictionary values
+            if task.lower() == task_check.lower(): # checks task to each task in dictionary and deletes row if equal
                 del list_of_rows[row_num]
                 row_num += 1
                 print("\n Okay,", task, "deleted!")
@@ -81,13 +81,12 @@ class Processor:
         :param list_of_rows: (list) you want filled with file data:
         :return: (list) of dictionary rows
         """
-        file_obj = open(file_name_str, "w")
-        for row_dic in list_of_rows:
+        file_obj = open(file_name, "w") # opens file to write in
+        for row_dic in list_of_rows:  # formats and writes data into file
             file_obj.write(row_dic["Task"] + "," + row_dic["Priority"] + "\n")
-        print("File saved.")
-        file_obj.close()
+        print("File saved.") # prints status
+        file_obj.close() #closes file
         return list_of_rows
-
 
 # Presentation (Input/Output)  -------------------------------------------- #
 
